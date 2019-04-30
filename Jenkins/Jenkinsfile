@@ -1,6 +1,6 @@
 node {
     def variable = "test"
-    
+
     stage('testing') {
         echo "this is a ${variable}"
     }
