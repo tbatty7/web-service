@@ -1,0 +1,21 @@
+#!groovy
+node {
+    def variable = "test"
+    stage('testing') {
+        echo "this is a ${variable}"
+    }
+    stage('git') {
+        git "https://github.com/tbatty7/web-service.git"
+    }
+    stage('build and run tests') {
+        sh "chmod a+rx ./gradlew"
+        sh "./gradlew build"
+    }
+    stage('push to PCF') {
+        withCredentials([usernamePassword(credentialsId: 'PCF_Credentials', passwordVariable: 'pcf_password', usernameVariable: 'pcf_user')]) {
+            sh "cf login -a api.run.pivotal.io -u ${env.pcf_user} -p '${env.pcf_password}'" +
+                    " -o Jessica-Tim -s development"
+            sh "cf push web-service -p build/libs/artifact-id-web-service-0.0.1-SNAPSHOT.jar"
+        }
+    }
+}
