@@ -8,6 +8,6 @@ public class Controller {
 
     @GetMapping("/")
     public String respond() {
-        return "Wassup Baby!";
+        return "<h1 style='color:green;'>Wassup Baby!</h1>";
     }
 }
