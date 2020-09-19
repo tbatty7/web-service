@@ -12,10 +12,10 @@ public class Counter {
         int numberOfRetries = 3;
         if (timesCalled < numberOfRetries) {
             System.out.println("Times Called: " + ++timesCalled);
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity("CUSTOMER_NOT_FOUND" ,HttpStatus.INTERNAL_SERVER_ERROR);
 
         } else {
-            return ResponseEntity.ok("it finally worked!");
+            return ResponseEntity.ok("Oh nevermind, I found the customer!");
         }
     }
 }
