@@ -9,7 +9,7 @@ public class Counter {
     private int timesCalled;
 
     public ResponseEntity giveResponse() {
-        int numberOfRetries = 3;
+        int numberOfRetries = 20;
         if (timesCalled < numberOfRetries) {
             System.out.println("Times Called: " + ++timesCalled);
             return new ResponseEntity("CUSTOMER_NOT_FOUND" ,HttpStatus.INTERNAL_SERVER_ERROR);
