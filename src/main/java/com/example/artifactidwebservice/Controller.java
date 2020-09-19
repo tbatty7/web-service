@@ -1,13 +1,19 @@
 package com.example.artifactidwebservice;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class Controller {
+    private Counter counter;
 
-    @GetMapping("/")
-    public String respond() {
-        return "<h1 style='color:green;padding:20%'>Wassup Baby!</h1>";
+    public Controller(Counter counter) {
+        this.counter = counter;
+    }
+
+    @GetMapping("/endpoint")
+    public ResponseEntity respond() {
+        return counter.giveResponse();
     }
 }
